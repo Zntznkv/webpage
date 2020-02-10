@@ -1,0 +1,20 @@
+image: node:9
+
+pages:
+    cache:
+        paths:
+        - node_modules/
+
+    script:
+    - pwd
+    - ls -lah
+    # - npm install
+    # - npm run dist
+    # - npx cpx 'dist/**/!(*.map)' 'web/' -u -v
+
+    artifacts:
+        paths:
+        - public
+
+    only:
+    - master
