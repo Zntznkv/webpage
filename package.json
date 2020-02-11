@@ -1,0 +1,87 @@
+{
+  "name": "peryl-pwa",
+  "version": "0.0.0",
+  "description": "PeRyL PWA skeleton",
+  "keywords": [
+    "PeRyL",
+    "PWA",
+    "typescript"
+  ],
+  "license": "GPL-3.0",
+  "author": {
+    "name": "Peter Rybar",
+    "email": "pr.rybar@gmail.com",
+    "url": "https://gitlab.com/peter-rybar"
+  },
+  "homepage": "https://gitlab.com/peter-rybar/peryl-pwa",
+  "repository": {
+    "type": "git",
+    "url": "https://gitlab.com/peter-rybar/peryl-pwa.git"
+  },
+  "bugs": {
+    "url": "https://gitlab.com/peter-rybar/peryl-pwa/issues"
+  },
+  "private": false,
+  "scripts": {
+    "clean": "rm -rf dist/",
+    "clean:all": "npm run clean; rm -rf node_modules",
+    "tslint": "tslint --project tsconfig.json",
+    "bundle": "webpack --mode production",
+    "bundle:watch": "webpack --mode development --watch",
+    "test": "run-s tslint bundle",
+    "workbox": "workbox",
+    "swim": "workbox inject:manifest",
+    "swim:watch": "onchange 'dist/sw.js' -v -- npm run swim",
+    "static": "cpx node_modules/workbox-sw/build/importScripts/workbox-sw.prod.*.js dist/; cpx 'src/static/**/*.*' 'dist/' -u -v",
+    "static:watch": "npm run static -- -w",
+    "dist": "run-s clean tslint bundle swim static",
+    "dist:watch": "run-p -r static:watch bundle:watch",
+    "server": "http-server dist/",
+    "dev": "run-p -r static:watch bundle:watch server",
+    "start": "npm run dev"
+  },
+  "pre-commit": [
+    "test"
+  ],
+  "devDependencies": {
+    "@types/chai": "^3.4.34",
+    "@types/incremental-dom": "^0.5.0",
+    "@types/numeral": "0.0.25",
+    "cpx": "^1.5.0",
+    "http-server": "^0.10.0",
+    "incremental-dom": "^0.5.1",
+    "moment": "^2.24.0",
+    "npm-run-all": "^4.1.5",
+    "numeral": "^2.0.6",
+    "onchange": "^3.2.1",
+    "peryl": "^1.4.0",
+    "pre-commit": "^1.2.2",
+    "ts-loader": "^5.4.5",
+    "tslint": "^5.20.0",
+    "typescript": "^3.6.4",
+    "webpack": "^4.41.1",
+    "webpack-cli": "^3.3.9",
+    "webpack-plugin-replace": "^1.2.0",
+    "workbox-cli": "^2.1.3",
+    "workbox-sw": "2.1.2"
+  },
+  "dependencies": {},
+  "prettier": {
+    "tabWidth": 4,
+    "printWidth": 80,
+    "overrides": [
+      {
+        "files": "package.json",
+        "options": {
+          "tabWidth": 2
+        }
+      },
+      {
+        "files": "*.yaml",
+        "options": {
+          "tabWidth": 2
+        }
+      }
+    ]
+  }
+}
