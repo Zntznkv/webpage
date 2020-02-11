@@ -8,9 +8,9 @@ pages:
     script:
     - pwd
     - ls -lah
-    # - npm install
-    # - npm run dist
-    # - npx cpx 'dist/**/!(*.map)' 'public/' -u -v
+    - npm install
+    - npm run dist
+    - npx cpx 'dist/**/!(*.map)' 'public/' -u -v
 
     artifacts:
         paths:
