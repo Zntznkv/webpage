@@ -1,0 +1,17 @@
+image: node:10
+
+pages:
+    cache:
+        paths:
+        - node_modules/
+
+    script:
+    - pwd
+    - ls -lah
+   
+    artifacts:
+        paths:
+        - public
+
+    only:
+    - master
